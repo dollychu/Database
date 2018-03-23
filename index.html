@@ -1,8 +1,48 @@
-<html>
-<head><title> User's Data </title></head>
-<body background="">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title> User's Data </title>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    
+</head>
+
+
+
+<body>
 <h2 align="center">Welcome~</h2>
-<form action="insertData.php" method="post">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4" align="center" style="background-color:lavenderblush;">Login</div>
+        <div class="col-sm-4" align="center" style="background-color:lavender;">Main Page</div>
+        <div class="col-sm-4" align="center" style="background-color:lavenderblush;">Account</div>
+    </div>
+
+	<form action="insertData.php" method="post">
+    <table class="table">
+    	<thead>
+      		<tr align="center">
+       		<th>User Information</th>
+     		</tr>
+    	</thead>
+    	<tbody>
+    		<tr>
+            	<td>Name: </td>
+                <td class="placeholder">name</td>
+            </tr>
+    	</tbody>
+    </table>
+    
+    
+    
+    
+	
 <center><table border="1" width="400" height="255">
 <tr>
 <td colspan="5" align="center"> User's Information</td>
@@ -23,7 +63,10 @@
 
 </table></center>
 </form>
+
+</div>
 </body>
+
 </html>
 
 
