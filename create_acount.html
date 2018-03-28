@@ -7,31 +7,67 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="js/check_match.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <style>
+        .profile-img-card {
+            width: 96px;
+            height: 96px;
+            margin: 0 auto 10px;
+            display: block;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+        }
+    </style>
 </head>
 
 <body>
 <div class='container'>
-
-    <h2> Create New Account </h2>
-    <form action='php/insertData.php' method='POST'>
-        <div class='form-group row'>
-            <label class='col-form-label col-sm-2' for='name'>Name:</label>
-            <div class='col-sm-10'>
-                <input type='text' class='form-control' id='name' placeholder='User name' required autofocus name='name'>
-            </div>
+    <h2></h2>
+    <div class="card offset-sm-3 col-sm-6 offset-sm-3 text-center">
+        <h2 class="card_header text-center">
+            ~Join Us~
+        </h2>
+        <div class="card-body">
+            <img class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="card image cap">
+            <form action='php/insertData.php' method='POST'>
+                <div class='form-group row'>
+                    <div class='input-group col'>
+                        <input type='text' class='form-control' id='name' placeholder='User name' required autofocus name='name'>
+                        <div class="input-group-append">
+                            <span class="input-group-text">invalid</span>
+                        </div>
+                    </div>
+                </div>
+                <div class='form-group row'>
+                    <div class='col'>
+                        <input type='password' class='form-control' id='passwd' placeholder='Password' required name='passwd'>
+                    </div>
+                    
+                </div>
+                <div class='form-group row'>
+                    <div class='input-group col'>
+                        <input type='password' class='form-control' id='confirm_pwd' placeholder='Enter password again' name='confirm_pwd' onkeyup="check_pwd_match();">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="pwd_confirm_status"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class='form-group row'>
+                    <div class='col'>
+                        <input type='submit' class='btn btn-primary' value='submit' name='submit'>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class='form-group row'>
-            <label class='col-form-label col-sm-2' for='passwd'>Password:</label>
-            <div class='col-sm-10'>
-                <input type='password' class='form-control' id='passwd' placeholder='Password' required name='passwd'>
-            </div>
-        </div>
-        <div class='form-group row'>
-            <div class='offset-sm-2 col-sm-10'>
-                <input type='submit' class='btn btn-primary' value='submit' name='submit'>
-            </div>
-        </div>
-    </form>
-
+    </div>
 </div>
 </body>
+
+
+</html>
+
+
+
