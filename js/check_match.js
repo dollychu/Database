@@ -1,10 +1,16 @@
-var check_pwd_match = function(){
-    if(document.getElementById('passwd').value ==
-       document.getElementById('confirm_pwd').value){
-        document.getElementById('pwd_confirm_status').setAttribute("class", "input-group-text bg-success text-white");
-        document.getElementById('pwd_confirm_status').innerHTML = 'match';
-    } else{
-        document.getElementById('pwd_confirm_status').setAttribute("class", "input-group-text bg-danger text-white");
-        document.getElementById('pwd_confirm_status').innerHTML = 'not match';
-    }
+
+function checkMatch(){
+  if($("#newPwd").val() == $("#conPwd").val()){
+    $("#confirm_status").attr("class", "input-group-text bg-success text-light");
+    $("#confirm_status").text("match");
+    $("#submit").removeClass("disabled");
+    return true;
+  }
+  else{
+    $("#confirm_status").attr("class", "input-group-text bg-danger text-white");
+    $("#confirm_status").text("mismatch");
+    $("#submit").addClass("disabled");
+    return false;
+  }
 }
+

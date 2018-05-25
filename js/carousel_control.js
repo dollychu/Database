@@ -19,3 +19,5 @@ function carousel_control(){
     $this.children('.carousel-control-prev').removeClass('disable');
   }
 }
+
+

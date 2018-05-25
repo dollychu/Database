@@ -84,3 +84,8 @@
 .carousel-control-next.disable{
   display: none;
 }
+.carousel-control-prev:hover,
+.carousel-control-next:hover{
+  background-color: rgba(204,204,204,0.5);
+}
+
