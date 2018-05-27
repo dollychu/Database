@@ -1,0 +1,86 @@
+
+<!DCOTYPE html>
+
+<html lang="en">
+  <head>
+    <title> New Acount </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="js/document_ready.js"></script>
+    <script src="js/check_match.js"></script>
+    
+    
+    
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <style>
+      body{ padding-top: 80px; }
+      .profile-img-card {
+        width: 96px;
+        height: 96px;
+        margin: 0 auto 10px;
+        display: block;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+
+  <body>
+  <div id="HEADER"></div>
+  <div class="container-fluid row justify-content-center">
+    <div class="card col-md-5 col-11 ml-4 text-center">
+      <h2 class="card_header text-center mt-3">
+          ~Join Us~
+      </h2>
+      <div class="card-body">
+        <img class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="card image cap">
+        <form action="php/insertData.php" method="POST">
+        
+          <div class="form-group row">
+            <div class="input-group col">
+              <input type="text" class="form-control" id="name" placeholder="User name" required autofocus name="name">
+              <!--div class="input-group-append">
+                <span class="input-group-text"></span>
+              </div-->
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <div class="col-md mb-1"><input type="password" class="form-control col" placeholder="Password" id="newPwd" required name="passwd"></div>
+            <div class="input-group col-md">
+              <input type="password" class="form-control" placeholder="Enter password again" id="conPwd" name="confirm_pwd" onkeyup="checkMatch();">
+              <div class="input-group-append">
+                <span class="input-group-text" id="confirm_status"></span>
+              </div>
+            </div>
+          </div>
+          
+          
+          <div class="form-group row">
+            <div class="col-md mb-1"><input type="text" class="form-control" placeholder="Birthday: yyyy/mm/dd" id="birthday" name="birthday"></div>
+            <div class="col-md mb-1"><input type="text" class="form-control" placeholder="Gender: M/F/U" id="gender" name="gender"></div>
+            <div class="col-md"><input type="text" class="form-control" placeholder="Single/Married" id="marriage" name="marriage"></div>
+          </div>
+          
+          <div class="form-group row">
+            <div class="col-md-7"><input type="email" class="form-control" placeholder="Email" id="email" name="email"></div>
+            <div class="col-md-5"><input type="tel" class="form-control" placeholder="Phone" id="phone" name="phone" minlength="10" maxlength="10"></div>
+          </div>
+          
+          <div class="form-group justify-content-center">
+            <input type="submit" class="btn btn-primary disabled col-md-4" value="submit" name="submit" id="submit">
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+  </body>
+</html>
+
+
+
