@@ -14,7 +14,7 @@ if(isset($_POST['submit'])){
     return 0;
   } 
   $stmt->bind_param("i", $uid);
-  $uid = $_SESSION['UID'];
+  $uid = $_SESSION['IdUser'];
   
   $oldPwd = $_POST['oldPwd'];
   $newPwd = $_POST['newPwd'];

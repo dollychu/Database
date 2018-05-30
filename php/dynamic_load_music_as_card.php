@@ -27,11 +27,11 @@ else{
     else echo "<div class='carousel-item col-md-4'>";
     echo <<< End
         <a style="text-decoration:none;" href="../musicPlayer.html?path={$path}">
-          <div class='card text-dark' style="height: 160px; background-color: #4DF9F7;">
+          <div class='card text-dark' style="height: 160px; background-image: linear-gradient(#ffffff, #aad7ff);">
             <div class='card-header'>{$name}</div>
             <div class='card-body'>
               <h5 class='card-title'>Light card</h5>
-              <p class='card-text'>Click to play the cong.</p>
+              <p class='card-text'>Click to play the song.</p>
             </div>    
           </div>
         </a>

@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-if(!isset($_SESSION['UID'])){
+if(!isset($_SESSION['IdUser'])){
   if(isset($_SESSION['MSG'])){
     echo "<script>
             alert(\"{$_SESSION['MSG']}\"); 

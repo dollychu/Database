@@ -1,6 +1,6 @@
 
 
-$("#firstSlide").on("slid.bs.carousel", carousel_control);
+$(".carousel.slide").on("slid.bs.carousel", carousel_control);
 
 function carousel_control(){
   var $this = $(this);

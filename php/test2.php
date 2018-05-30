@@ -1,6 +1,7 @@
 <?php
 
-$date = "2010/10/20";
-printf(str_replace('/','-',$date));
+include "loadIcon.php";
+
+echo load_icon(30);
 
 ?>

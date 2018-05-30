@@ -9,7 +9,7 @@ if(isset($_POST['submit'])){
   $query = "SELECT Name FROM User WHERE Name=?";
   
   if(!$stmt = $conn->prepare($query)){
-    print "<h1>Failed to prepare for query.</h1>";
+    echo "<h1>Failed to prepare for query.</h1>";
     $stmt->close();
     $conn->close();
     
@@ -21,7 +21,7 @@ if(isset($_POST['submit'])){
   $stmt->execute();
   $result = $stmt->get_result();
   if($result->num_rows){
-      echo"<h1>Account exist!! Please use other names.</h1>";
+      echo"<h1>Account exist!! Please use another names.</h1>";
   }
   else{
     /*** Insert User ***/
@@ -37,13 +37,12 @@ if(isset($_POST['submit'])){
     $stmt->bind_param("ss", $name, $token);
     $passwd = $_POST['passwd'];
     $token = password_hash($passwd, PASSWORD_DEFAULT);
-    if($stmt->execute()) echo "<h2>Successfully create a new acount~</h2>";
-    else echo "<h2>Insertion error when executing query</h2>";
+    if(!$stmt->execute()) echo "<h2>Insertion error when executing query</h2>";
     
     /* Fetch the id of the user we've just added */
-    $tmp_result = $conn->query("SELECT UID FROM User WHERE Name='$name'");
+    $tmp_result = $conn->query("SELECT IdUser FROM User WHERE Name='$name'");
     $uid = $tmp_result->fetch_assoc();
-    $uid = $uid['UID'];
+    $uid = $uid['IdUser'];
     
     
     /*Insert Email */
@@ -59,8 +58,7 @@ if(isset($_POST['submit'])){
       }
       $stmt->bind_param("ss", $uid, $email);
       $email = $_POST['email'];
-      if($stmt->execute()) echo "<h2>Successfully insert email~</h2>";
-      else echo "<h2>Insertion error when executing query</h2>";
+      if(!$stmt->execute()) echo "<h2>Insertion error when executing query</h2>";
     }
     
     
@@ -68,7 +66,7 @@ if(isset($_POST['submit'])){
     if(isset($_POST['phone'])){
       $query = "INSERT INTO UserPhone (IdUser, PhoneNumber) VALUES (?,?)";
       if(!$stmt = $conn->prepare($query)){
-        print "<h1>Failed to prepare for query.</h1>";
+        echo "<h1>Failed to prepare for query.</h1>";
         $result->free();
         $stmt->close();
         $conn->close();
@@ -77,30 +75,29 @@ if(isset($_POST['submit'])){
       }
       $stmt->bind_param("ss", $uid, $phone);
       $phone = $_POST['phone'];
-      if($stmt->execute()) echo "<h2>Successfully insert phone number~</h2>";
-      else echo "<h2>Insertion error when executing query</h2>";
+      if(!$stmt->execute()) echo "<h2>Insertion error when executing query</h2>";
     }
     
     /* Insert UserInformation */
-    if(isset($_POST['gender']) && isset($_POST['birthday'])){
-      $query = "INSERT INTO UserInformation (IdUser, Name, Gender, Birthday) VALUES (?,?,?,?)";
+    if(isset($_POST['gender']) && isset($_POST['birthday']) && isset($_POST['avator'])){
+      $query = "INSERT INTO UserInformation (IdUser, Icon, Gender, Birthday) VALUES (?,?,?,?)";
       if(!$stmt = $conn->prepare($query)){
-        print "<h1>Failed to prepare for query.</h1>";
+        echo "<h1>Failed to prepare for query.</h1>";
         $result->free();
         $stmt->close();
         $conn->close();
         
         return 0;
       }
-      $stmt->bind_param("ssss", $uid, $name, $gender, $birthday);
+      $stmt->bind_param("ssss", $uid, $icon, $gender, $birthday);
       $gender = $_POST['gender'];
       if($gender=="M" || $gender=="m") $gender="Boy";
       else if($gender=="F" || $gender=="f") $gender="Girl";
       else $gender="Unspecified";
       
+      $icon = $_POST['avator'];
       $birthday = $_POST['birthday'];
-      if($stmt->execute()) echo "<h2>Successfully insert user information~</h2>";
-      else echo "<h2>Insertion error when executing query</h2>";
+      if(!$stmt->execute()) echo "<h2>Insertion error when executing query</h2>";
     }
     
   }
@@ -110,7 +107,7 @@ if(isset($_POST['submit'])){
 }
 $conn->close();
 
-$wait = 3;
+$wait = 1;
 echo "<h4>Redirect after $wait seconds...</h4>";
 header("Refresh: $wait; ../index.html");
 exit();

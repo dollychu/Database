@@ -15,6 +15,7 @@
     
     
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel='stylesheet' href='css/carousel_style.css'>
     <style>
       body{ padding-top: 80px; }
       .profile-img-card {
@@ -25,6 +26,21 @@
         -moz-border-radius: 50%;
         -webkit-border-radius: 50%;
         border-radius: 50%;
+      }
+      .carousel-item img:hover{
+        border-style: solid;
+        border-width: 3px;
+      }
+      label > input{ /* HIDE RADIO */
+        visibility: hidden; /* Makes input not-clickable */
+        position: absolute; /* Remove input from document flow */
+      }
+      label > input + img{ /* IMAGE STYLES */
+        cursor:pointer;
+        border:2px solid transparent;
+      }
+      label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+        border:2px solid;
       }
     </style>
   </head>
@@ -69,6 +85,77 @@
           <div class="form-group row">
             <div class="col-md-7"><input type="email" class="form-control" placeholder="Email" id="email" name="email"></div>
             <div class="col-md-5"><input type="tel" class="form-control" placeholder="Phone" id="phone" name="phone" minlength="10" maxlength="10"></div>
+          </div>
+          
+          <div class="form-group row">
+            <div class="carousel slide col" id="avatorSelection" data-ride="carousel" data-interval="false">
+              <div class="carousel-inner row">
+                <div class="carousel-item col-md-4 active">
+                  <label>
+                    <input type="radio" name="avator" value="girl01">
+                    <img src="image/avator/girl01.png" width="150px">
+                  </label>
+                </div>
+                
+                <div class="carousel-item col-md-4">
+                  <label>
+                    <input type="radio" name="avator" value="boy01">
+                    <img src="image/avator/boy01.png" width="150px">
+                  </label>
+                </div>
+                
+                <div class="carousel-item col-md-4">
+                  <label>
+                    <input type="radio" name="avator" value="no01">
+                    <img src="image/avator/no01.png" width="150px">
+                  </label>
+                </div>
+                
+                <div class="carousel-item col-md-4">
+                  <label>
+                    <input type="radio" name="avator" value="boy02">
+                    <img src="image/avator/boy02.png" width="150px">
+                  </label>
+                </div>
+                
+                <div class="carousel-item col-md-4">
+                  <label>
+                    <input type="radio" name="avator" value="girl02">
+                    <img src="image/avator/girl02.png" width="150px">
+                  </label>
+                </div>
+                
+                <div class="carousel-item col-md-4">
+                  <label>
+                    <input type="radio" name="avator" value="girl03">
+                    <img src="image/avator/girl03.png" width="150px">
+                  </label>
+                </div>
+                
+                <div class="carousel-item col-md-4">
+                  <label>
+                    <input type="radio" name="avator" value="boyreal">
+                    <img src="image/avator/boyreal.png" width="150px">
+                  </label>
+                </div>
+                
+                <div class="carousel-item col-md-4">
+                  <label>
+                    <input type="radio" name="avator" value="girlreal">
+                    <img src="image/avator/girlreal.png" width="150px">
+                  </label>
+                </div>
+              </div>
+              <a class="carousel-control-prev disable" href="#avatorSelection" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#avatorSelection" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+            <script src='js/carousel_control.js'></script>
           </div>
           
           <div class="form-group justify-content-center">
