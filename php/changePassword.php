@@ -37,6 +37,11 @@ if(isset($_POST['submit'])){
     
     echo "<h1>Successfully update~</h1>";
     
+    // Update user data
+    $updateTime = date("Y-m-d H:i:s");
+    $query = "UPDATE User SET UpdateAt='$updateTime' WHERE IdUser={$_SESSION['IdUser']}";
+    $conn->query($query);
+    
     $result->free();
     $stmt->close();
     $conn->close();

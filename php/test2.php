@@ -1,7 +1,7 @@
 <?php
 
-include "loadIcon.php";
+echo date("Y-m-d H:i:s");
 
-echo load_icon(30);
+
 
 ?>

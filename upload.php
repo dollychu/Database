@@ -97,7 +97,7 @@
   {
     $path = "Music/".$_SESSION['UserName'];
     if(!is_dir($path)) mkdir($path, 0777, true);
-
+    
     $audio_name = basename($_FILES['uploaded_file']['name']);
     $path = $path ."/" .$audio_name;
 
@@ -106,6 +106,7 @@
         ALERT("There was an error when updating the DB!");
         return 0;
       }
+      chmod($path, 0777);
       ALERT($audio_name." has been uploaded");
     } 
     else{
@@ -136,6 +137,11 @@
       $conn->close();
       return 0;
     }
+    
+    // Update user data
+    $updateTime = date("Y-m-d H:i:s");
+    $query = "UPDATE User SET UpdateAt='$updateTime' WHERE IdUser={$_SESSION['IdUser']}";
+    $conn->query($query);
     
     $stmt->close();
     $conn->close();

@@ -19,6 +19,14 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body{ padding-top: 70px; }
+        .card-img-left {
+          border-bottom-left-radius: calc(.25rem - 1px);
+          border-top-left-radius: calc(.25rem - 1px);
+          float: left;
+          padding-right: 1em;
+          margin-bottom: -1.25em;
+          object-fit: cover;
+        }
     </style>
   </head>
 
@@ -36,65 +44,16 @@
         <div class="tab-content col-sm-9">
           <!-- Account Info pane -->
           <div class="tab-pane fade show active" role="tabpanel" id="accountInfo">
-            <div class="container-fluid row">
-              <form class="col-md-9">
-                <div class="form-group row">
-                  <label for="accountName" class="col-sm-3 col-form-label">Your Name:</label>
-                  <div class="col-sm-9">
-                    <input type="text" readonly class="form-control-plaintext" value="<?php echo $_SESSION['UserName'];?>">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="form-group row">
-                    <label for="birthdayInfo" class="col-sm-3 col-form-label">Birthday:</label>
-                    <div class="col-sm-9">
-                      <input type="text" readonly class="form-control-plaintext" value="<?php echo $_SESSION['UserBirthday']; ?>">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="form-group row">
-                    <label for="phoneInfo" class="col-sm-3 col-form-label">Phone:</label>
-                    <div class="col-sm-9">
-                      <input type="text" readonly class="form-control-plaintext" value="<?php echo $_SESSION['UserPhone']; ?>">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="form-group row">
-                    <label for="emailInfo" class="col-sm-3 col-form-label">Email Address:</label>
-                    <div class="col-sm-9">
-                      <input type="text" readonly class="form-control-plaintext" value="<?php echo $_SESSION['UserEmail']; ?>">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="form-group row">
-                    <label for="genderInfo" class="col-sm-3 col-form-label">Gender:</label>
-                    <div class="col-sm-9">
-                      <input type="text" readonly class="form-control-plaintext" value="<?php echo $_SESSION['UserGender']; ?>">
-                    </div>
-                  </div>
-                </div>
-
-              </form>
-              <div class="col-md-3 mb-2">
-                <?php 
-                  include "php/loadIcon.php";
-                  $icon = load_icon($_SESSION['IdUser']);
-                  
-                  echo "<img src='image/avator/$icon.png' width='250px'>";
-                ?>
-              </div>
-            </div><!--End of inner container-->
+            <?php include "php/PrintAccountInfo.php";  ?>
           </div>
           
           <!-- Song uploaded Pane -->
           <div class="tab-pane fade" role="tabpanel" id="upload">
+            <div class="container-fluid row">
+              <div class="col-md-8">
+                <?php include "php/getUploadedMusic.php"; ?>
+              </div>
+            </div>
           </div>
 
           <!-- Followers pane -->
@@ -123,8 +82,8 @@
                   </div>
                 </div>
                 <div class="form-group"><input type="submit" class="btn btn-primary disabled" value="submit" name="submit" id="submit"></div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
           
           <div class="tab-pane fade" role="tabpanel" id="others"></div>
