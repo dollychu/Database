@@ -54,7 +54,7 @@ _END;
 function getMailContent($otherUsr){
   require_once "login2.php";
   $conn = get_connection();
-  $query = "SELECT DISTINCT (SELECT Name FROM User WHERE IdUser=Mail.IdFrom) AS usrFrom, (SELECT Name FROM User WHERE IdUser=Mail.IdTo) AS usrTo, Mail.Content, Mail.CreateAt, Mail.Enabled FROM User INNER JOIN Mail WHERE (IdFrom=(SELECT IdUser FROM User WHERE NAME=$otherUsr) AND IdTo=(SELECT IdUser FROM User WHERE NAME=$_SESSION['IdUser'])) OR (IdFrom=(SELECT IdUser FROM User WHERE NAME=$_SESSION['IdUser']) AND IdTo=(SELECT IdUser FROM User WHERE NAME=$otherUsr))";
+  $query = "SELECT DISTINCT (SELECT Name FROM User WHERE IdUser=Mail.IdFrom) AS usrFrom, (SELECT Name FROM User WHERE IdUser=Mail.IdTo) AS usrTo, Mail.Content, Mail.CreateAt, Mail.Enabled FROM User INNER JOIN Mail WHERE (IdFrom=(SELECT IdUser FROM User WHERE NAME=$otherUsr) AND IdTo=(SELECT IdUser FROM User WHERE NAME={$_SESSION['IdUser']})) OR (IdFrom=(SELECT IdUser FROM User WHERE NAME={$_SESSION['IdUser']}) AND IdTo=(SELECT IdUser FROM User WHERE NAME=$otherUsr))";
 
   if($result = $conn->query($query)){
     $return_v = array();
