@@ -37,15 +37,6 @@
       <div class="row mx-auto">
         <div class="list-group col-sm-3 mb-3" id="settingList" role="tablist">
           <?php include "php/getConnectList.php";  ?>
-
-          <!--
-          <a class="list-group-item list-group-item-action active" data-toggle="list" href="#accountInfo" role="tab">Account Info</a>
-          <a class="list-group-item list-group-item-action" data-toggle="list" href="#upload" role="tab">Your Upload</a>
-          <a class="list-group-item list-group-item-action" data-toggle="list" href="#followers" role="tab">Followers</a>
-          <a class="list-group-item list-group-item-action" data-toggle="list" href="#security" role="tab">Security</a>
-          <a class="list-group-item list-group-item-action" data-toggle="list" href="#others" role="tab">Others</a>
-          -->
-
         </div>
         <div class="tab-content col-sm-9">
           <!-- Mail Content pane -->
