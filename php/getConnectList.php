@@ -1,6 +1,6 @@
 <?php
 
-$result = getUpload($_SESSION['IdUser']);
+$result = getConnect($_SESSION['IdUser']);
 
 foreach($result as $mail){
   echo <<< _END
