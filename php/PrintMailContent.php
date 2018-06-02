@@ -2,7 +2,7 @@
 session_start();
 
 include "loadIcon.php";
-include "getConnectList.php"
+include "getConnectList.php";
 $icon = load_icon($_SESSION['IdUser']);
 
 foreach($result as $mail){
@@ -29,6 +29,16 @@ foreach($result as $mail){
                 <div class="form-group">
                   {$mail['MailContent']}
                 </div>
+
+                <div class="form-group">
+                  <div class="form-group row">
+                    <label for="birthdayInfo" class="col-sm-3 col-form-label"></label>
+                    <div class="col-sm-9">
+                      <input type="text" readonly class="form-control-plaintext" value="{$mail['SentDate']}">
+                    </div>
+                  </div>
+                </div>
+
               </form>
             </div><!--End of inner container-->
           </div>

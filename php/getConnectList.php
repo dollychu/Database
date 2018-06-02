@@ -6,22 +6,6 @@ foreach($result as $mail){
   echo <<< _END
     <a class="list-group-item list-group-item-action active" data-toggle="list" href="#{$mail['MailTo']}" role="tab"> {$mail['MailTo']} </a>
 _END;
-    
-  echo $song['UploadUser'] == $_SESSION['IdUser'] ? "<button type='button' class='btn btn-outline-danger mb-2 mx-auto' id='{$song['IdMusic']}{$_SESSION['IdUser']}'>Remove</button>" : '';
-  echo "</div>";
-
-  if($song['UploadUser'] == $_SESSION['IdUser']){
-    echo <<< _END
-      <script>
-        $("#{$song['IdMusic']}{$_SESSION['IdUser']}").click(function(){
-          $.post('php/removeMusic.php', { IdMusic: {$song['IdMusic']} } )
-            .done(function(data){
-              alert("Result: " + data);
-            });
-        });
-      </script>
-_END;
-  }
 }
 
 
