@@ -36,6 +36,7 @@
     <div class='container-fluid'>
       <div class="row mx-auto">
         <div class="list-group col-sm-3 mb-3" id="settingList" role="tablist">
+          test
           <?php include "php/getConnectList.php";  ?>
         </div>
         <div class="tab-content col-sm-9">
