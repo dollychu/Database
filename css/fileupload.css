@@ -33,6 +33,11 @@ input[type="file"] {
     right: 100%;
     bottom: 100%;
 }
+input.hidden{
+  position: fixed;
+  right: 100%;
+  bottom: 100%;
+}
 .custom-file-upload {
   border: 1px solid #ccc;
   border-radius: 5px;

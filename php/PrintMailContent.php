@@ -1,8 +1,8 @@
 <?php  
 session_start();
 
-include "loadIcon.php";
-include "getConnectList.php"
+require_once "loadIcon.php";
+require_once "getConnectList.php";
 $icon = load_icon($_SESSION['IdUser']);
 
 foreach($result as $mail){
@@ -33,5 +33,5 @@ foreach($result as $mail){
             </div><!--End of inner container-->
           </div>
 _END;
-
+}
 ?>
