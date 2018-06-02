@@ -1,22 +1,22 @@
 <?php
 
-$result = getConnectMail($_SESSION['IdUser']);
+$result = getConnectList($_SESSION['IdUser']);
 
-foreach($result as $mail){
+foreach($result as $contact){
   echo <<< _END
-    <a class="list-group-item list-group-item-action active" data-toggle="list" href="#{$mail['MailId']}" role="tab"> {$mail['MailTo']} </a>
+    <a class="list-group-item list-group-item-action active" data-toggle="list" href="#{$contact['ContactUser']}" role="tab"> {$mail['ContactUser']} </a>
 _END;
 }
 
-function getConnectMail($uid){
+function getConnectList($uid){
   require_once "login2.php";
   $conn = get_connection();
-  $query = "SELECT User.Name, Mail.Content, Mail.CreateAt, Mail.Idmail FROM User INNER JOIN Mail WHERE IdUser=(SELECT IdTo FROM User INNER JOIN Mail WHERE IdFrom=IdUser AND Name=$uid)";
+  $query = "SELECT DISTINCT User.Name FROM User INNER JOIN Mail WHERE IdUser IN (SELECT DISTINCT IdTo FROM User INNER JOIN Mail WHERE IdFrom=IdUser AND Name=$uid) OR IdUser IN (SELECT DISTINCT IdFrom FROM User INNER JOIN Mail WHERE IdTo=IdUser AND Name=$uid)";
 
   if($result = $conn->query($query)){
     $return_v = array();
     while($row = $result->fetch_array()){
-      $assoc = array('MailFrom'=>$uid, 'MailTo'=>$row[0], 'MailContent'=>$row[1], 'SentDate'=>explode(' ',$row[2])[0], 'MailId'=>$row[3]);
+      $assoc = array('ContactUser'=>$row[0]);
       $return_v[] = $assoc;
     }
     return $return_v;
