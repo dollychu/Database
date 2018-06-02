@@ -7,7 +7,7 @@ $icon = load_icon($_SESSION['IdUser']);
 
 foreach($result as $mail){
   echo <<< _END
-          <div class="tab-pane fade show active" role="tabpanel" id="{$mail['MailTo']}">
+          <div class="tab-pane fade show active" role="tabpanel" id="{$mail['MailId']}">
             <div class="container-fluid row">
               <form class="col-md-9">
                 <div class="form-group row">
@@ -43,5 +43,6 @@ foreach($result as $mail){
             </div><!--End of inner container-->
           </div>
 _END;
+}
 
 ?>
