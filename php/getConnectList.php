@@ -1,6 +1,6 @@
 <?php
 
-$result = getConnect($_SESSION['IdUser']);
+$result = getMailConnect($_SESSION['IdUser']);
 
 foreach($result as $mail){
   echo <<< _END
@@ -10,7 +10,7 @@ _END;
 
 
 
-function getConnect($uid){
+function getMailConnect($uid){
   require_once "login2.php";
   $conn = get_connection();
   
