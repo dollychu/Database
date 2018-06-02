@@ -54,6 +54,20 @@
                 <?php include "php/getUploadedMusic.php"; ?>
               </div>
             </div>
+            <script>
+              $("button").click(function(){
+                var button_id = $(this).attr("id");
+                var card_id = button_id.replace("_", "");
+                var mid = button_id.split("_")[0];
+                $.post('php/removeMusic.php', { IdMusic: mid } )
+                  .done(function(){
+                    $("#"+card_id).fadeOut(800, function(){ $("#"+card_id).remove()});
+                  })
+                  .fail(function(data){
+                    alert("Failed to remove: " + data)
+                  });
+              });
+            </script>
           </div>
 
           <!-- Followers pane -->

@@ -35,6 +35,9 @@ _END;
   }
   echo "</div>";
 }
+else{
+  echo "<p class='text-muted'> You don't have any follower yet. </p>";
+}
 
 $result->free();
 $stmt->close();

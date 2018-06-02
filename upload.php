@@ -23,30 +23,68 @@
 
   <body>
     <div id='HEADER'></div>
-    <div class="container-fluid"><div class="row justify-content-center">
+    <div class="container-fluid row justify-content-center">
       <form class="col-md-5" action="upload.php" enctype="multipart/form-data" method="POST">
-        
-        <!--span class="btn btn-success fileinput-button">
-          <span>Select file</span>
-          <input id="fileupload" name="uploaded_file" type="file" mutiple="">
-        </span>
-        <div id="progress" class="progress">
-          <div class="progress-bar progress-bar-success"></div>
-        </div>
-        <div id="files" class="files"></div-->
-        
-        <div class="form-row align-middle mb-1">
-          <input type="text" class="col-md-8 mr-2" value="selected file..." disabled id="selectedFile">
-          <span class="align-middle">
-          <label for="uploadfile" class="custom-file-upload mt-2">
-            Select File
-          </label>
-          <span>
-          <input type="file" class="btn" name="uploaded_file" id="uploadfile">
-        </div>
-        
+       
+        <div class="accordion mb-2" id="optionalInfo">
+          <div class="card">
+            <div class="card-header" id="opt_description">
+              <h5 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#upload" aria-expanded="true" aria-controls="upload">
+                  Upload
+                </button>
+              </h5>
+            </div>
+            <div id="upload" class="collapse show" aria-labelledby="opt_pload" data-parent="#optionalInfo">
+              <div class="card-body row justify-content-center">
+                <input type="text" class="form-control col-md-8 mr-2" value="selected file..." disabled id="selectedFile">
+                <span class="align-middle">
+                  <label for="uploadfile" class="custom-file-upload mt-2">
+                    Select File
+                  </label>
+                </span>
+                <input type="file" class="btn" name="uploaded_file" id="uploadfile">
+              </div><!-- End of card-body -->
+            </div>
+          </div><!-- End of card -->
+          <div class="card">
+            <div class="card-header" id="opt_description">
+              <h5 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#description" aria-expanded="true" aria-controls="description">
+                  Description
+                </button>
+              </h5>
+            </div>
+            <div id="description" class="collapse" aria-labelledby="opt_description" data-parent="#optionalInfo">
+              <div class="card-body">
+                <textarea class="form-control" aria-label="Description" name="description"></textarea>
+              </div><!-- End of card-body -->
+            </div>
+          </div><!-- End of card -->
+
+          <div class="card">
+            <div class="card-header" id="opt_tag">
+              <h5 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#tag" aria-expanded="true" aria-controls="tag">
+                 Tag 
+                </button>
+              </h5>
+            </div>
+            <div id="tag" class="collapse" aria-labelledby="opt_tag" data-parent="#optionalInfo">
+              <div class="card-body">
+                <div class="input-group mb-1">
+                  <input type="text" class="form-control" id="tagInput"> 
+                  <div class="input-group-append">
+                    <span class="btn input-group-text btn-outline-secondary add-tag">+</span>
+                  </div>
+                </div>
+                <h5 id="tags"></h5>
+              </div><!-- End of card-body -->
+            </div>
+          </div><!-- End of card -->
+        </div><!-- End of accordion -->
+
         <input type="submit" class="btn btn-primary" value="Upload">
-        
       </form>
       <script>
         $('#uploadfile').bind('change', function() { 
@@ -54,40 +92,18 @@
           fileName = $(this).val().split('\\'); 
           $('#selectedFile').attr("value", fileName[fileName.length-1]); 
         });
+        
+        $(document).on('click', '.remove-me', function(){
+          $(this).remove();
+        });
+        $('.add-tag').click(function(){
+          var tag = $("#tagInput").val();
+          $('#tags').append("<span class='btn badge badge-info mr-1 remove-me'>"+tag+"</span>");
+          $('#tagInput').val('');
+        });
+
       </script>
-    </div></div>
-    
-    <!--script src="js/jquery.ui.widget.js"></script>
-    <script src="js/jquery.uploadfile.js"></script>
-    <script>
-    /*jslint unparam: true */
-    /*global window, $ */
-    $(function () {
-        'use strict';
-        // Change this to the location of your server-side upload handler:
-        var url = window.location.hostname === 'localhost' ? 'php/upload.php' : '//jquery-file-upload.appspot.com/';
-        $('#fileupload').fileupload({
-            url: url,
-            dataType: 'json',
-            done: function (e, data) {
-                $.each(data.result.files, function (index, file) {
-                    $('<p/>').text(file.name).appendTo('#files');
-                });
-            },
-            progressall: function (e, data) {
-                var progress = parseInt(data.loaded / data.total * 100, 10);
-                $('#progress .progress-bar').css(
-                    'width',
-                    progress + '%'
-                );
-            }
-        }).prop('disabled', !$.support.fileInput)
-            .parent().addClass($.support.fileInput ? undefined : 'disabled');
-    });
-    </script-->
-    
-    
-    
+    </div><!-- End of container-fluid -->
   </body>
 </html>
 
@@ -96,12 +112,23 @@
   if(isset($_SESSION['IdUser']) && !empty($_FILES['uploaded_file']))
   {
     $path = "Music/".$_SESSION['UserName'];
-    if(!is_dir($path)) mkdir($path, 0777, true);
-    
+    if(!is_dir($path)){
+      if(!mkdir($path, 0777, true)){
+        echo "Failed to create new folder.";
+      }
+    }
+
     $audio_name = basename($_FILES['uploaded_file']['name']);
     $path = $path ."/" .$audio_name;
-
-    if(move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $path)) {
+    
+    $avail_fmt = array("audio/mp4", "video/mp4", "audio/mpeg", "audio/ogg", "application/octet-stream");
+    $finfo = new finfo(FILEINFO_MIME_TYPE);
+    $mime = $finfo->file($_FILES['uploaded_file']['tmp_name']);
+    if(false === array_search($mime, $avail_fmt, true)){
+      ALERT("File format not supported: ".$mime);
+      return 0;
+    }
+    else if(move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $path)) {
       if(!updateDB($audio_name)){
         ALERT("There was an error when updating the DB!");
         return 0;
@@ -110,7 +137,20 @@
       ALERT($audio_name." has been uploaded");
     } 
     else{
-      ALERT("There was an error uploading the file, please try again!");
+      switch($_FILES['upfile']['error']){
+        case UPLOAD_ERR_OK:
+          ALERT("Upload ok, but fail at other place");
+          break;
+        case UPLOAD_ERR_NO_FILE:
+          ALERT("No file sent.");
+          break;
+        case UPLOAD_ERR_INI_SIZE:
+        case UPLOAD_ERR_FORM_SIZE:
+          ALERT("Exceeded filesize limit.");
+          break;
+        default:
+          ALERT("Unknown errors.");
+      }
     }
   }
   function updateDB($audio_name){
@@ -118,7 +158,7 @@
 
     $conn = get_connection();
     $stmt = $conn->stmt_init();
-    $query = "INSERT INTO Music(Name, UploadUser, MusicStoredPath) VALUES('$audio_name', {$_SESSION['IdUser']}, ?)";
+    $query = "INSERT INTO Music(Name, UploadUser, MusicStoredPath, Description) VALUES('$audio_name', {$_SESSION['IdUser']}, ?, ?)";
     if(!$stmt->prepare($query)){
       ALERT("Failed to prepare query!");
 
@@ -127,9 +167,9 @@
       return 0;
     }
 
-    $stmt->bind_param("s", $path);
+    $stmt->bind_param("ss", $path, $description);
     $path = "{$_SESSION['UserName']}/$audio_name";
-
+    $description = isset($_POST['description']) ? $_POST['description'] : "";
     if(!$stmt->execute()){
       ALERT("Failed to update database!");
 
