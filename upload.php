@@ -94,12 +94,17 @@
         });
         
         $(document).on('click', '.remove-me', function(){
+          var input_val = $(this).text();
           $(this).remove();
+          $('input[value='+input_val+']').remove();
         });
         $('.add-tag').click(function(){
           var tag = $("#tagInput").val();
+          tag = tag.replace(/\ /g, '');
           $('#tags').append("<span class='btn badge badge-info mr-1 remove-me'>"+tag+"</span>");
+          $('#tags').append("<input type='text' class='hidden' name='tags[]' value='"+tag+"'>");
           $('#tagInput').val('');
+          var se = $('form').serialize();
         });
 
       </script>
@@ -109,6 +114,7 @@
 
 <?php
   session_start();
+  
   if(isset($_SESSION['IdUser']) && !empty($_FILES['uploaded_file']))
   {
     $path = "Music/".$_SESSION['UserName'];
@@ -177,13 +183,29 @@
       $conn->close();
       return 0;
     }
+    $mid = $stmt->insert_id;
+    $stmt->close();
+    
+    // Insert tags
+    if(isset($_POST['tags'])){
+      $query = "INSERT INTO Tag(TagName, IdUser, IdMusic) VALUES(?, {$_SESSION['IdUser']}, $mid)";
+      $stmt = $conn->stmt_init();
+      $tmp = $stmt->prepare($query);
+      $stmt->bind_param('s', $tag);
+      $tags = $_POST['tags'];
+      foreach($tags as $tag){
+        $stmt->execute();
+      }
+      $result->free();
+      $stmt->close();
+    }
     
     // Update user data
     $updateTime = date("Y-m-d H:i:s");
     $query = "UPDATE User SET UpdateAt='$updateTime' WHERE IdUser={$_SESSION['IdUser']}";
     $conn->query($query);
     
-    $stmt->close();
+    
     $conn->close();
 
     return 1;

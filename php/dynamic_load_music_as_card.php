@@ -26,7 +26,7 @@ else{
     if($i == 0) echo "<div class='carousel-item col-md-4 active'>";
     else echo "<div class='carousel-item col-md-4'>";
     echo <<< End
-        <a style="text-decoration:none;" href="../musicPlayer.html?path={$path}">
+        <a style="text-decoration:none;" href="../musicPlayer.php?path={$path}">
           <div class='card text-dark' style="height: 160px; background-image: linear-gradient(#ffffff, #aad7ff);">
             <div class='card-header'>{$name}</div>
             <div class='card-body'>

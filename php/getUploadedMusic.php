@@ -11,7 +11,7 @@ foreach($result as $song){
 echo <<< _END
   <div class="card text-dark mb-2" id="{$song['IdMusic']}{$_SESSION['IdUser']}">
     <img class="card-img-top mx-auto mt-3" src="image/double_note.png" style="width: 200px;">
-    <a style="text-decoration:none;" href="musicPlayer.html?path={$song['Path']}">
+    <a style="text-decoration:none;" href="musicPlayer.php?path={$song['Path']}">
       <div class="card-body text-dark">
         <h4 class="card-title text-center"> {$song['MusicName']} </h4>
         
