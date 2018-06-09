@@ -83,9 +83,8 @@
   <script>
     var played = false;
     $("#audioPlayer").on('play', function(){
-      var isLogin = <?php echo isset($_SESSION['IdUser']) ? 1 : 0; ?>;
       var path = decodeURI($.urlParam('path'));
-      if(!played && isLogin){
+      if(!played){
         played = true;
         $.post("php/increaseMusicViewedNum.php", { music_path: path })
           .done(function(data){

@@ -1,5 +1,5 @@
-<?php include "php/checkLogin.php"; ?>
 <?php $_SESSION['MSG'] = "Please login first."; ?>
+<?php include "php/checkLogin.php"; ?>
 
 
 <!DOCTYPE html>
@@ -24,7 +24,7 @@
   <body>
     <div id='HEADER'></div>
     <div class="container-fluid row justify-content-center">
-      <form class="col-md-5" action="upload.php" enctype="multipart/form-data" method="POST">
+      <form class="col-md-7" action="upload.php" enctype="multipart/form-data" method="POST">
        
         <div class="accordion mb-2" id="optionalInfo">
           <div class="card">
@@ -43,7 +43,7 @@
                     Select File
                   </label>
                 </span>
-                <input type="file" class="btn" name="uploaded_file" id="uploadfile">
+                <input type="file" class="btn required" name="uploaded_file" id="uploadfile">
               </div><!-- End of card-body -->
             </div>
           </div><!-- End of card -->
@@ -106,7 +106,12 @@
           $('#tagInput').val('');
           var se = $('form').serialize();
         });
-
+        $('form').submit(function(event){
+          if($('input.required').val().length === 0){
+            alert("Please select a file to upload!");
+            event.preventDefault();
+          }
+        });
       </script>
     </div><!-- End of container-fluid -->
   </body>

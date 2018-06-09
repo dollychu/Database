@@ -16,9 +16,9 @@
           <li class="nav-item active"><a class="nav-link" href="./">HOME<span class="sr-only">(current)</span></a></li>
         </ul>
 
-        <form class="form-inline col-md-4 ml-auto" type='search'>
+        <form class="form-inline col-md-4 ml-auto" type='search' action="./searchResult.php" method="GET">
           <div class="container row justify-content-center">
-            <div class="col-8-fluid"><input class="form-control" type="text" placeholder="Search"></div>
+            <div class="col-8-fluid"><input class="form-control" type="text" placeholder="Search" name="search_str"></div>
             <div class="col-4-fluid"><button class="btn btn-default ml-sm-2" type="submit">GO</button></div>
           </div>
         </form>
@@ -32,7 +32,7 @@
                   echo "<a class='nav-link' href='settings.php'>".$_SESSION['UserName']."</a>";
                 }
                 else{
-                  echo "<a class='nav-link' href='sign_in.php'>SIGN IN</a>";
+                  echo "<a class='nav-link' href='sign_in.html'>SIGN IN</a>";
                 }
               ?>
             </li></div>

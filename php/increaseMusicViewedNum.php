@@ -8,7 +8,7 @@ require_once "GetMusicInfo.php";
 $mid = getIdMusic("path=".$_POST['music_path']);
 
 session_start();
-$uid = $_SESSION['IdUser'];
+$uid = isset($_SESSION['IdUser']) ? $_SESSION['IdUser'] : 21;
 
 $query = "INSERT INTO Viewed(IdUser, IdMusic) VALUES($uid, $mid)";
 if(!$conn->query($query)){

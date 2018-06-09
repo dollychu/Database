@@ -16,8 +16,25 @@ function getIdMusic($url){
   return $mid;
 }
 
-function getUploader($music_path){
-  $mid = getIdMusic($music_path);
+function getDescription($mid){
+  if(preg_match("/[^\d]/", $mid)) $mid = getIdMusic($mid);
+
+  require_once "login2.php";
+  $conn = get_connection();
+
+  $query = "SELECT Description FROM Music WHERE IdMusic=$mid";
+  if(!$result = $conn->query($query)){
+    $conn->close();
+    return "Can't fetch description.";
+  }
+  $description = $result->fetch_array()[0];
+  $conn->close();
+  
+  return $description;
+}
+
+function getUploader($mid){
+  if(preg_match("/[^\d]/", $mid)) $mid = getIdMusic($mid);
 
   require_once "login2.php";
   $conn = get_connection();
@@ -36,8 +53,8 @@ function getUploader($music_path){
   return $name;
 }
 
-function getViewedNum($music_path){
-  $mid = getIdMusic($music_path);
+function getViewedNum($mid){
+  if(preg_match("/[^\d]/", $mid)) $mid = getIdMusic($mid);
 
   require_once "login2.php";
   $conn = get_connection();
@@ -54,6 +71,76 @@ function getViewedNum($music_path){
   $conn->close();
 
   return $num;
+}
+
+function getMusicName($mid){
+  if(preg_match("/[^\d]/", $mid)) $mid = getIdMusic($mid);
+
+  require_once "login2.php";
+  $conn = get_connection();
+
+  $query = "SELECT Name FROM Music WHERE IdMusic=$mid";
+  if(!$result = $conn->query($query)){
+    $conn->close();
+    return "Can't fetch music name.";
+  }
+  $name = $result->fetch_array()[0];
+  $conn->close();
+  
+  return $name;
+}
+
+function getUploadDate($mid){
+  if(preg_match("/[^\d]/", $mid)) $mid = getIdMusic($mid);
+
+  require_once "login2.php";
+  $conn = get_connection();
+
+  $query = "SELECT CreateAt FROM Music WHERE IdMusic=$mid";
+  if(!$result = $conn->query($query)){
+    $conn->close();
+    return "Can't fetch upload date.";
+  }
+  $date = $result->fetch_array()[0];
+  $conn->close();
+  
+  return explode(' ', $date)[0];
+}
+
+function getTag($mid){
+  if(preg_match("/[^\d]/", $mid)) $mid = getIdMusic($mid);
+
+  require_once "login2.php";
+  $conn = get_connection();
+
+  $query = "SELECT TagName FROM Tag NATURAL JOIN Music WHERE IdMusic=$mid";
+  if(!$result = $conn->query($query)){
+    $conn->close();
+    return "Can't fetch tag.";
+  }
+  
+  while($row = $result->fetch_row()){
+    $tag[] = $row[0];
+  }
+  
+  $conn->close();
+  
+  return $tag;
+}
+
+function getPath($mid){
+  require_once "login2.php";
+  $conn = get_connection();
+
+  $query = "SELECT MusicStoredPath FROM Music WHERE IdMusic=$mid";
+  if(!$result = $conn->query($query)){
+    $conn->close();
+    return "Can't fetch stored path.";
+  }
+  $path = $result->fetch_array()[0];
+  $conn->close();
+  
+  return $path;
 }
 
 ?>

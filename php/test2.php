@@ -1,6 +1,7 @@
 <?php
 
-echo date("Y-m-d H:i:s");
+$str = "d  ";
+echo preg_match("/^ *$/", $str);
 
 
 

@@ -1,6 +1,6 @@
 
-<?php include "php/checkLogin.php"; ?>
 <?php $_SESSION['MSG'] = "Please login first."; ?>
+<?php include "php/checkLogin.php"; ?>
 
 
 <!DOCTYPE html>
