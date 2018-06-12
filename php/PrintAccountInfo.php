@@ -6,7 +6,7 @@ $icon = load_icon($_SESSION['IdUser']);
 
 echo <<< _END
   <div class="container-fluid row">
-    <form class="col-md-9">
+    <form class="col-md-9" style="background-color: rgba(255,255,255,0.75); border-bottom: solid 2px gray;">
       <div class="form-group row">
         <label for="accountName" class="col-sm-3 col-form-label">Your Name:</label>
         <div class="col-sm-9">

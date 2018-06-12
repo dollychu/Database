@@ -144,7 +144,7 @@
         ALERT("There was an error when updating the DB!");
         return 0;
       }
-      chmod($path, 0777);
+      chmod($path, 0731);
       ALERT($audio_name." has been uploaded");
     } 
     else{

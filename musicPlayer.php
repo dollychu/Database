@@ -32,19 +32,36 @@
     
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
-      body{ padding-top: 70px; }
+      body{ 
+        padding-top: 70px; 
+        background-image: url("./image/zen01.jpg");
+      }
     </style>
   </head>
   
   
   <body>
     <div id="HEADER"></div>
-    <div class='container'>
-      <div class="row justify-content-around">
-        <div class="col-md-8">
+    <div class='container-fluid'>
+      <div class="row">
+        <div class="offset-md-2 col-md-7">
           <?php include "php/playerPane.php"; ?>
           <?php include "php/loadComment.php"; ?>
         </div><!-- End of col -->
+        <div class="col-md-3">
+          <div class="btn-group btn-group-toggle mb-1" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+              <input type="radio" name="options" id="loop" autocomplete="off" checked> LOOP
+            </label>
+            <label class="btn btn-secondary">
+               <input type="radio" name="options" id="rand" autocomplete="off"> RAND
+            </label>
+          </div>
+          <ul class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action" href="#"> Hey </a>
+            <a class="list-group-item list-group-item-action" href="#"> Yoo </a>
+          </ul>
+        </div>
       </div><!--End of row-->
         
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

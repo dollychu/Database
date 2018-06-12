@@ -1,5 +1,6 @@
 <?php
 require_once "login.php";
+include "GetMusicInfo.php";
 
 $conn = new mysqli($hn, $un, $pw, $db);
 if($conn->connect_error) die($conn->connect_error);
@@ -20,6 +21,9 @@ else{
   while($h = $result->fetch_array(MYSQLI_NUM)){
     $name = $h[0];
     $path = $h[1];
+    $viewed   = getViewedNum($path);
+    $uploader = getUploader($path);
+    $date     = getUploadDate($path);
     
     $name = pathinfo($name, PATHINFO_FILENAME);
     
@@ -28,10 +32,13 @@ else{
     echo <<< End
         <a style="text-decoration:none;" href="../musicPlayer.php?path=$path">
           <div class='card text-dark' style="height: 160px; background-image: linear-gradient(#ffffff, #aad7ff);">
-            <div class='card-header'>$name</div>
             <div class='card-body'>
-              <h5 class='card-title'>Light card</h5>
-              <p class='card-text'>Click to play the song.</p>
+              <h5 class='card-title'>$name</h5>
+              <div class='container text-info'>
+                <small class='card-text row'> Viewed: $viewed </small>
+                <small class='card-text row'> Uploaded by $uploader </small>
+                <small class='card-text row'> Uploaded at $date </small>
+              </div>
             </div>    
           </div>
         </a>

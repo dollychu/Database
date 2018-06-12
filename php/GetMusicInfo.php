@@ -3,8 +3,9 @@
 function getIdMusic($url){
   require_once "login2.php";
   $conn = get_connection();
-
-  $path = urldecode(explode('path=', $url)[1]);
+  
+  $path = preg_match("/^path=/", $url) ? urldecode(explode('path=', $url)[1]) : urldecode($url);
+  
   $query = "SELECT IdMusic FROM Music WHERE MusicStoredPath='$path'";
   if(!$result = $conn->query($query)){
     echo "Failed processing the query: ".$query;

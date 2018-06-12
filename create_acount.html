@@ -54,8 +54,7 @@
       </h2>
       <div class="card-body">
         <img class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="card image cap">
-        <form action="php/insertData.php" method="POST">
-        
+        <form>
           <div class="form-group row">
             <div class="input-group col">
               <input type="text" class="form-control" id="name" placeholder="User name" required autofocus name="name">
@@ -168,6 +167,32 @@
   </div>
   </body>
 </html>
+<script>
+  $('form').on('submit', function(event){
+    event.preventDefault();
+    $.ajax({
+        url: "php/createAccount.php", 
+        data: $(this).serialize(), 
+        dataType: "json",
+        method: "POST"
+      })
+      .done(function(result){
+        alert(result.msg);
+        if(result.success) window.location.href = "./index.html";
+      })
+      .fail(function(xhr, status, errorThrown){
+        alert(errorThrown);
+      });
+  });
+</script>
+
+
+
+
+
+
+
+
 
 
 

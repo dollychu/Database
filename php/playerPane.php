@@ -23,7 +23,12 @@ echo "
     </audio>
     
     <p class='card-text text-muted col'> Viewed: $viewed </p>
-    <p class='card-text text-muted col'> Uploaded by $uploader </p>
+    <p class='card-text text-muted col'>
+      Uploaded by 
+      <a href='' class='text-dark font-weight-bold'>
+        $uploader 
+      </a>
+    </p>
     <p class='card-text text-muted col'> Upload date: $date </p>
     <p class='card-text text-info col'> $description </p>
     <h5 class='col'>";
