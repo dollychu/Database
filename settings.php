@@ -27,6 +27,14 @@
           margin-bottom: -1.25em;
           object-fit: cover;
         }
+        .update-success {
+          border: 3px solid rgba(60, 242, 31, 0.3);
+          border-radius: 8px;
+        }
+        .update-fail {
+          border: 3px solid rgba(242, 31, 31, 0.3);
+          border-radius: 8px;
+        }
     </style>
   </head>
 
@@ -106,3 +114,4 @@
     </div><!--End of container-->
   </body>
 </html>
+<script src="js/updateAccount.js"></script>

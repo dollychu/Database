@@ -1,7 +1,9 @@
 <?php
+require_once "utils.php";
+$str = "path=Adele some one would like you.mp3&list_id=4";
 
-$str = " path=";
-echo preg_match("/^path=/", $str);
+
+echo decodeUrlVar($str, "path");
 
 
 

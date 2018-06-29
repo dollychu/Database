@@ -6,11 +6,11 @@ $icon = load_icon($_SESSION['IdUser']);
 
 echo <<< _END
   <div class="container-fluid row">
-    <form class="col-md-9" style="background-color: rgba(255,255,255,0.75); border-bottom: solid 2px gray;">
+    <form class="col-md-9" id="AccInfo" style="background-color: rgba(255,255,255,0.75); border-bottom: solid 2px gray;">
       <div class="form-group row">
         <label for="accountName" class="col-sm-3 col-form-label">Your Name:</label>
         <div class="col-sm-9">
-          <input type="text" readonly class="form-control-plaintext" value="{$_SESSION['UserName']}">
+          <input type="text" class="form-control-plaintext" value="{$_SESSION['UserName']}" id="name">
         </div>
       </div>
 
@@ -18,7 +18,7 @@ echo <<< _END
         <div class="form-group row">
           <label for="birthdayInfo" class="col-sm-3 col-form-label">Birthday:</label>
           <div class="col-sm-9">
-            <input type="text" readonly class="form-control-plaintext" value="{$_SESSION['UserBirthday']}">
+            <input type="text" class="form-control-plaintext" value="{$_SESSION['UserBirthday']}" id="birth">
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@ echo <<< _END
         <div class="form-group row">
           <label for="phoneInfo" class="col-sm-3 col-form-label">Phone:</label>
           <div class="col-sm-9">
-            <input type="text" readonly class="form-control-plaintext" value="{$_SESSION['UserPhone']}">
+            <input type="tel" class="form-control-plaintext" value="{$_SESSION['UserPhone']}" id="phone" minlength="10" maxlength="10">
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@ echo <<< _END
         <div class="form-group row">
           <label for="emailInfo" class="col-sm-3 col-form-label">Email Address:</label>
           <div class="col-sm-9">
-            <input type="text" readonly class="form-control-plaintext" value="{$_SESSION['UserEmail']}">
+            <input type="email" class="form-control-plaintext" value="{$_SESSION['UserEmail']}" id="email">
           </div>
         </div>
       </div>
@@ -45,7 +45,7 @@ echo <<< _END
         <div class="form-group row">
           <label for="genderInfo" class="col-sm-3 col-form-label">Gender:</label>
           <div class="col-sm-9">
-            <input type="text" readonly class="form-control-plaintext" value="{$_SESSION['UserGender']}">
+            <input type="text" class="form-control-plaintext" value="{$_SESSION['UserGender']}" id="gender" placeholder="M/F/U">
           </div>
         </div>
       </div>

@@ -10,11 +10,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src='js/document_ready.js'></script>
+    
     <script>
       $.urlParam = function(name){
         var results = new RegExp('[\?&]' + name + '=([^]*)').exec(window.location.href);
         if (results==null) return null;
-        else return results[1] || 0;
+        else results = results[1] || 0;
+        if(results.search("&") != -1) results = results.split('&')[0];
+        
+        return results;
       }
       
       $(document).ready(function(){
@@ -25,9 +29,16 @@
         var title = hrefVar.split('/');
         title = title[title.length-1];
         $('#audioCardTitle').text(title.slice(0,-4));
+
+        var isPlaying = $.urlParam('playing');
+        if(isPlaying == 1) $("#audioPlayer")[0].play();
+        
+        var play_mode = $.urlParam('play_mode');
+        if(play_mode != null){
+          $('#ctrlBtn > label.active').removeClass('active');
+          $('#'+play_mode).parent().addClass('active');
+        }
       });
-      
-      
     </script>
     
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
@@ -49,18 +60,22 @@
           <?php include "php/loadComment.php"; ?>
         </div><!-- End of col -->
         <div class="col-md-3">
-          <div class="btn-group btn-group-toggle mb-1" data-toggle="buttons">
-            <label class="btn btn-secondary active">
-              <input type="radio" name="options" id="loop" autocomplete="off" checked> LOOP
-            </label>
-            <label class="btn btn-secondary">
-               <input type="radio" name="options" id="rand" autocomplete="off"> RAND
-            </label>
+        
+          <div class="row justify-content-center mr-1">
+            <div class="btn-group btn-group-toggle mb-1" data-toggle="buttons" id="ctrlBtn">
+              <label class="btn btn-outline-dark active">
+                <input type="radio" name="options" id="once" autocomplete="off"> ONCE
+              </label>
+              <label class="btn btn-outline-dark">
+                <input type="radio" name="options" id="loop" autocomplete="off"> LOOP
+              </label>
+            </div>
           </div>
-          <ul class="list-group list-group-flush">
-            <a class="list-group-item list-group-item-action" href="#"> Hey </a>
-            <a class="list-group-item list-group-item-action" href="#"> Yoo </a>
+          
+          <ul class="list-group list-group-flush" id="playlist">
+            <?php include "php/loadPlayList.php"; ?>
           </ul>
+          
         </div>
       </div><!--End of row-->
         
@@ -97,45 +112,8 @@
       </div><!--End of modal-->
     </div><!-- End of container -->
   </body>
-  <script>
-    var played = false;
-    $("#audioPlayer").on('play', function(){
-      var path = decodeURI($.urlParam('path'));
-      if(!played){
-        played = true;
-        $.post("php/increaseMusicViewedNum.php", { music_path: path })
-          .done(function(data){
-            //alert(data); // To debug, uncomment this line
-          })
-          .fail(function(jqXHR, textStatus){
-            alert("There is something wrong updating the viewed num: "+textStatus);
-          });
-      }
-    });
-    
-    $("#commitCmt").click(function(){
-        var cmt = $("#cmtMSG").val();
-        var music = decodeURI($.urlParam('path'));
-        $.post("php/insertMusicComment.php", { comment: cmt, music_path: music })
-          .done(function(last_id){
-            $("#playerPane").after($.cardTemplate(cmt, last_id));
-            $("#comment_"+last_id).hide().fadeIn(1200);
-            $("#cmtMSG").val('');
-          })
-          .fail(function(jqXHR, textStatus ){
-            alert('fail' + textStatus);
-          });
-      });
-      $.cardTemplate = function(text, id){
-        var user_name = "<?php echo $_SESSION['UserName']; ?>";
-        return "<div class='card mb-1' id='comment_"+ id +"'>\
-                  <div class='card-header'>"+ user_name +"</div>\
-                  <div class='card-body'>\
-                    <p class='card-text'>" + text + "</p>\
-                  </div>\
-                </div>";
-      };
-  </script>
+  <script src="js/playlistAction.js"></script>
+  <script src="js/leaveComment.js"></script>
 </html>
 
 

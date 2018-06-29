@@ -24,7 +24,7 @@
   <body>
     <div id='HEADER'></div>
     <div class="container-fluid row justify-content-center">
-      <form class="col-md-7" action="upload.php" enctype="multipart/form-data" method="POST">
+      <form class="col-md-7" action="upload.php" enctype="multipart/form-data" method="POST" id="uploadForm">
        
         <div class="accordion mb-2" id="optionalInfo">
           <div class="card">
@@ -93,14 +93,27 @@
           $('#selectedFile').attr("value", fileName[fileName.length-1]); 
         });
         
-        $(document).on('click', '.remove-me', function(){
-          var input_val = $(this).text();
-          $(this).remove();
-          $('input[value='+input_val+']').remove();
-        });
+        $(document)
+          .on('click', '.remove-me', function(){
+            var input_val = $(this).text();
+            $(this).remove();
+            $('input[value='+input_val+']').remove();
+          })
+          .keypress(function(e){
+            if(e.which == 13){
+              e.preventDefault();
+              if($('#tagInput').is(':focus')){
+                $('.add-tag').trigger('click');
+              }
+              else{
+                $('#uploadForm').trigger('submit');
+              }
+            }
+          });
+        
         $('.add-tag').click(function(){
           var tag = $("#tagInput").val();
-          tag = tag.replace(/\ /g, '');
+          tag = tag.replace(/\W/g, '');
           $('#tags').append("<span class='btn badge badge-info mr-1 remove-me'>"+tag+"</span>");
           $('#tags').append("<input type='text' class='hidden' name='tags[]' value='"+tag+"'>");
           $('#tagInput').val('');
@@ -205,12 +218,9 @@
       $stmt->close();
     }
     
-    // Update user data
-    $updateTime = date("Y-m-d H:i:s");
-    $query = "UPDATE User SET UpdateAt='$updateTime' WHERE IdUser={$_SESSION['IdUser']}";
-    $conn->query($query);
-    
-    
+    require_once "php/updateAccount.php";
+    update_updateDate($_SESSION['IdUser']);
+
     $conn->close();
 
     return 1;

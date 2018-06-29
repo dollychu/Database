@@ -46,7 +46,7 @@ echo "
       var islogin = $isLogin;
       if(!islogin){
         alert('You have not yet logged in! Please login first to leave a comment.');
-        window.location.href = 'sign_in.php';
+        window.location.href = 'sign_in.html';
       }
     });
   </script>

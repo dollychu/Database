@@ -1,11 +1,15 @@
 <?php
 
+require_once "utils.php";
+
 function getIdMusic($url){
   require_once "login2.php";
   $conn = get_connection();
   
+  $url_ = decodeUrlVar($url, "path");
+  $url  = empty($url_) ? $url : $url_;
   $path = preg_match("/^path=/", $url) ? urldecode(explode('path=', $url)[1]) : urldecode($url);
-  
+
   $query = "SELECT IdMusic FROM Music WHERE MusicStoredPath='$path'";
   if(!$result = $conn->query($query)){
     echo "Failed processing the query: ".$query;
@@ -26,7 +30,7 @@ function getDescription($mid){
   $query = "SELECT Description FROM Music WHERE IdMusic=$mid";
   if(!$result = $conn->query($query)){
     $conn->close();
-    return "Can't fetch description.";
+    return "Can't fetch description.".$mid;
   }
   $description = $result->fetch_array()[0];
   $conn->close();
@@ -143,5 +147,7 @@ function getPath($mid){
   
   return $path;
 }
+
+
 
 ?>

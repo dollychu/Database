@@ -24,7 +24,7 @@
       <div class='container-fluid'>
         <div class='row'>
           <div class='col-sm-8 mb-2'>
-            <div id='main_page_carousel'></div>
+            <?php require_once "php/LoadCarouselContent.php"; ?>
           </div><!--End of Col-sm-8-->
 
           <div class='col-sm-4'>
