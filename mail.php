@@ -1,6 +1,6 @@
 
-<?php include "php/checkLogin.php"; ?>
 <?php $_SESSION['MSG'] = "Please login first."; ?>
+<?php include "php/checkLogin.php"; ?>
 
 
 <!DOCTYPE html>
@@ -16,6 +16,7 @@
     <script src='js/document_ready.js'></script>
     <script src='js/check_match.js'></script>
     
+    <link href="css/chat_bubble.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body{ padding-top: 70px; }
@@ -31,13 +32,11 @@
   </head>
 
   <body>
-    <div id="HEADER">
-    </div>
+    <div id="HEADER"></div>
     <div class='container-fluid'>
       <div class="row mx-auto">
         <div class="list-group col-sm-3 mb-3" id="settingList" role="tablist">
-          test
-          <?php include "php/getConnectList.php";  ?>
+      <?php include "php/getConnectList.php";  ?>
         </div>
         <div class="tab-content col-sm-9">
           <!-- Mail Content pane -->
