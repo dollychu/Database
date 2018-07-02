@@ -1,7 +1,7 @@
 <?php
 
 #$result = getConnect($_SESSION['IdUser']);
-$result = getConnect(43);
+$result = getConnect($_SESSION['IdUser']);
 
 if(empty($result)){
   echo "<p> you don't have any mail. </p>";
@@ -27,7 +27,7 @@ function getConnect($uid){
   
   $query = "SELECT User.Name as contact
     FROM User INNER JOIN Mail 
-    WHERE Mail.IdFrom=43 AND User.Name in(SELECT Name FROM User WHERE IdUser=Mail.IdTo) or Mail.IdTo=43 AND User.Name in(SELECT Name FROM User WHERE IdUser=Mail.IdFrom)
+    WHERE Mail.IdFrom={$_SESSION['IdUser']} AND User.Name in(SELECT Name FROM User WHERE IdUser=Mail.IdTo) or Mail.IdTo={$_SESSION['IdUser']} AND User.Name in(SELECT Name FROM User WHERE IdUser=Mail.IdFrom)
     GROUP BY User.Name;";
   
   if($result = $conn->query($query)){

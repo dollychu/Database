@@ -22,7 +22,7 @@ foreach($result as $contact){
 
   foreach($res as $content){
     #  if($mail['IdTo'] = $_SESSION['IdUser']){
-    if($content['IdTo'] == 43){
+    if($content['IdTo'] == $_SESSION['IdUser']){
       echo <<< _END
               <div class="from-them">
                 <p>{$content['Content']}</p>
@@ -48,7 +48,7 @@ function getContent($name){
 
   $query = "SELECT Mail.IdFrom, Mail.IdTo, Mail.Content, Mail.CreateAt, Mail.Enabled
             FROM User INNER JOIN Mail 
-            WHERE User.Name='$name' AND ((Mail.IdFrom=43 AND Mail.IdTo=User.IdUser) OR (Mail.IdTo=43 AND Mail.IdFrom=User.IdUser));";
+            WHERE User.Name='$name' AND ((Mail.IdFrom={$_SESSION['IdUser']} AND Mail.IdTo=User.IdUser) OR (Mail.IdTo={$_SESSION['IdUser']} AND Mail.IdFrom=User.IdUser));";
     
   if($result = $conn->query($query)){
     $return_v = array();
