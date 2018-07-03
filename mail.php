@@ -28,85 +28,6 @@
           margin-bottom: -1.25em;
           object-fit: cover;
         }
-
-        section {
-          max-width: 450px;
-          margin: 50px auto;
-          div {
-            max-width: 255px;
-            word-wrap: break-word;
-            margin-bottom: 20px;
-            line-height: 24px;
-          }
-        }
-
-        .clear {
-          clear: both
-        }
-
-        .from-me {
-          position: relative;
-          padding: 10px 20px;
-          color: white;
-          background: #0B93F6;
-          border-radius: 25px;
-          float: right;
-          &:before {
-            content: "";
-            position: absolute;
-            z-index: -1;
-            bottom: -2px;from-me loud
-            right: -7px;
-            height: 20px;
-            border-right: 20px solid #0B93F6;
-            border-bottom-left-radius: 16px 14px;
-            -webkit-transform: translate(0, -2px);
-          }
-          &:after {
-            content: "";
-            position: absolute;
-            z-index: 1;
-            bottom: -2px;
-            right: -56px;
-            width: 26px;
-            height: 20px;
-            background: white;
-            border-bottom-left-radius: 10px;
-            -webkit-transform: translate(-30px, -2px);
-          }
-        }
-
-        .from-them {
-          position: relative;
-          padding: 10px 20px;
-          background: #E5E5EA;
-          border-radius: 25px;
-          color: black;
-          float: left;
-          &:before {
-            content: "";
-            position: absolute;
-            z-index: 2;
-            bottom: -2px;
-            left: -7px;
-            height: 20px;
-            border-left: 20px solid #E5E5EA;
-            border-bottom-right-radius: 16px 14px;
-            -webkit-transform: translate(0, -2px);
-          }
-          &:after {
-            content: "";
-            position: absolute;
-            z-index: 3;
-            bottom: -2px;
-            left: 4px;
-            width: 26px;
-            height: 20px;
-            background: white;
-            border-bottom-right-radius: 10px;
-            -webkit-transform: translate(-30px, -2px);
-          }
-        }
     </style>
   </head>
 
@@ -119,11 +40,12 @@
           <?php include "php/getConnectList.php";  ?>
 
         </div>
-        <div class="tab-content col-sm-9">
+        <div class="tab-content col-sm-6">
           <!-- Mail Content pane -->
           <?php include "php/PrintMailContent.php";  ?>
         </div>
       </div><!--End of row-->
     </div><!--End of container-->
   </body>
+  <script src="js/sendMail.js"></script>
 </html>
